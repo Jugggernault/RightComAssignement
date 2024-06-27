@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Calculator app</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header></header>
+    <main class="main" data-theme="theme-1">
+      <div class="calc-container">
+        <div class="theme-setter">
+          <div class="logo">calc</div>
+          <div class="theme-wrapper">
+            <div class="theme-number">
+              <span class="thm">1 2 3</span>
+            </div>
+
+              <div class="theme-content">
+                <span class="theme-title">Theme</span>
+                <div class="theme theme-1">
+                  <div data-theme="theme-1" class="toggle1 tgl selected"></div>
+                  <div data-theme="theme-2" class="toggle2 tgl"></div>
+                  <div data-theme="theme-3"  class="toggle3 tgl"></div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="expression-entry">
+            <input class=" expression" type="text" id="expression" value="">
+          </div>
+          <div class="buttons-grid">
+            <div class="buttons">
+              <button class="btn" data-value="7">7</button>
+              <button class="btn" data-value="8">8</button>
+              <button class="btn" data-value="9">9</button>
+              <button id="del" class="btn special-keys" data-value="DEL" >DEL</button>
+              <button class="btn" data-value="4">4</button>
+              <button class="btn" data-value="5">5</button>
+              <button class="btn" data-value="6">6</button>
+              <button class="btn" data-value="+">+</button>
+              <button class="btn" data-value="1">1</button>
+              <button class="btn" data-value="2">2</button>
+              <button class="btn" data-value="3">3</button>
+              <button class="btn" data-value="-">-</button>
+              <button class="btn" data-value=".">.</button>
+              <button class="btn" data-value="0">0</button>
+              <button class="btn" data-value="/">/</button>
+              <button class="btn" data-value="x">x</button>
+            </div>
+            <div class="result">
+              <input id="reset" class="special-keys reset " type="button" value="Reset">
+              <input id="result-button"  class="result-button" type="button" value="=">
+            </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Abed-Négo</a>.
+      </div>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>
