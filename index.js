@@ -1,13 +1,13 @@
 function add_entry_on_click(entry) {
     let btn = entry.target.getAttribute('data-value');
     let expression = document.getElementById('expression');
-    let operators = ['-', '+', '/', '*','DEL','.','x'];
-    if (btn == 'DEL'){
+    let operators = ['-', '+', '/', '*', 'DEL', '.', 'x'];
+    if (btn == 'DEL') {
         delete_last();
         return
     }
 
-    if (operators.includes(btn) && (operators.includes(expression.value.charAt(expression.value.length - 1)))){
+    if (operators.includes(btn) && (operators.includes(expression.value.charAt(expression.value.length - 1)))) {
         console.log(expression.value.charAt(expression.value.length - 1))
         return
     }
@@ -20,6 +20,13 @@ let buttons = document.querySelectorAll('.btn')
 
 buttons.forEach(btn => {
     btn.addEventListener('click', add_entry_on_click);
+    btn.addEventListener('click', function(event) {
+        event.target.classList.add('scale-animation');
+
+        setTimeout(function() {
+            event.target.classList.remove('scale-animation');
+        }, 100); 
+    });
 
 })
 
@@ -27,8 +34,8 @@ buttons.forEach(btn => {
 
 
 document.addEventListener('keydown', add_entry_on_keypress);
-document.getElementById('reset').addEventListener('click',clear)
-document.getElementById('result-button').addEventListener('click',calculate)
+document.getElementById('reset').addEventListener('click', clear)
+document.getElementById('result-button').addEventListener('click', calculate)
 
 function add_entry_on_keypress(event) {
     let operators = ['-', '+', '/', '*']
@@ -108,17 +115,20 @@ function calculate() {
     expression.value = operands[0];
 }
 
-function change_theme(event){
+function change_theme(event) {
     let toggleButtons = document.querySelectorAll('.tgl');
     toggleButtons.forEach(button => {
         button.classList.remove('selected');
     });
 
     let theme = event.target.getAttribute('data-theme');
-    document.querySelector('.main').setAttribute('data-theme',theme)
+    document.querySelector('.main').setAttribute('data-theme', theme)
     event.target.classList.add('selected');
 
 }
 
 let toggles = document.querySelectorAll('.tgl')
-toggles.forEach(tgl=>tgl.addEventListener('click',change_theme))
+toggles.forEach(tgl => tgl.addEventListener('click', change_theme))
+
+
+

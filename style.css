@@ -209,7 +209,11 @@ span.thm{
     cursor: pointer;
     filter: brightness(1.4);
 }
-btn::
+.scale-animation {
+    transform: scale(0.9); 
+    transition: transform 0.3s ease;
+}
+
 .result{
     display: flex;
     justify-content: space-between;
@@ -239,3 +243,14 @@ btn::
     box-shadow:0px 3px var(--blue-key-shadow);
     
 }
+
+
+@media screen and (min-width: 280px) and (max-width: 576px){
+    .buttons{
+        gap: 10px;
+    }
+    btn{
+        height: 30px;
+    }
+}
+
