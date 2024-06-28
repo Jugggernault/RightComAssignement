@@ -133,10 +133,6 @@ function change_theme(event) {
 let toggles = document.querySelectorAll('.tgl')
 toggles.forEach(tgl => tgl.addEventListener('click', change_theme))
 
-if (localStorage.getItem('theme')) {
-
-    document.querySelector('.main').setAttribute('data-theme', localStorage.getItem('theme'))
-}
 
 let toggleButtons = document.querySelectorAll('.tgl');
 toggleButtons.forEach(button => {
@@ -144,3 +140,7 @@ toggleButtons.forEach(button => {
         button.classList.add('selected')
     }
 })
+
+if (['theme-1','theme-2','theme3'].includes(localStorage.getItem('theme'))) {
+    document.querySelector('.main').setAttribute('data-theme', localStorage.getItem('theme'))
+}
