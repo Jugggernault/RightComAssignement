@@ -8,10 +8,11 @@ function add_entry_on_click(entry) {
     }
 
     if (operators.includes(btn) && (operators.includes(expression.value.charAt(expression.value.length - 1)))) {
-        console.log(expression.value.charAt(expression.value.length - 1))
         return
     }
+    if (operators.includes(btn)){
 
+    }
     expression.value += btn;
 }
 
@@ -52,20 +53,23 @@ function add_entry_on_keypress(event) {
 
 function clear() {
     document.getElementById("expression").value = ""
+    document.getElementById('res').textContent = '';
 }
 function delete_last() {
     let expression = document.getElementById("expression");
     expression.value = expression.value.slice(0, -1);
 }
 
+
 function calculate() {
-    let expression = document.getElementById('expression')
+    let expression = document.getElementById('expression');
     let lastChar = expression.value.slice(-1);
-    if (['+', '-', '*', '/'].includes(lastChar)) {
+    
+    if (['+', '-', 'x', '/'].includes(lastChar)) {
         return;
     }
 
-    let tokens = expression.value.match(/(\d+\.?\d*|\.\d+|[-+*/])/g);
+    let tokens = expression.value.match(/(\d+\.?\d*|\.\d+|[-+x/])/g);
     if (!tokens) {
         throw new Error("Invalid expression");
     }
@@ -77,7 +81,7 @@ function calculate() {
     let precedence = {
         '+': 1,
         '-': 1,
-        '*': 2,
+        'x': 2,
         '/': 2
     };
 
@@ -89,30 +93,27 @@ function calculate() {
         switch (operator) {
             case '+': operands.push(a + b); break;
             case '-': operands.push(a - b); break;
-            case '*': operands.push(a * b); break;
+            case 'x': operands.push(a * b); break;
             case '/': operands.push(a / b); break;
         }
     }
 
-    for (let token of tokens) {
+    tokens.forEach(token => {
         if (!isNaN(token)) {
-            // Si le token est un nombre, le convertir en nombre et le pousser dans la pile des opérandes
             operands.push(parseFloat(token));
-        } else if (token in precedence) {
-            // Si le token est un opérateur
-            while (operators.length > 0 && precedence[operators[operators.length - 1]] >= precedence[token]) {
+        } else {
+            while (operators.length && precedence[operators[operators.length - 1]] >= precedence[token]) {
                 apply_operator();
             }
             operators.push(token);
         }
-    }
+    });
 
-    // Appliquer les opérateurs restants
-    while (operators.length > 0) {
+    while (operators.length) {
         apply_operator();
     }
 
-    expression.value = operands[0];
+    document.getElementById('res').textContent = operands[0];
 }
 
 function change_theme(event) {
@@ -122,8 +123,10 @@ function change_theme(event) {
     });
 
     let theme = event.target.getAttribute('data-theme');
+    localStorage.setItem('theme',theme)
     document.querySelector('.main').setAttribute('data-theme', theme)
     event.target.classList.add('selected');
+    console.log(localStorage.getItem('theme'))
 
 }
 
@@ -131,4 +134,10 @@ let toggles = document.querySelectorAll('.tgl')
 toggles.forEach(tgl => tgl.addEventListener('click', change_theme))
 
 
-
+document.querySelector('.main').setAttribute('data-theme',localStorage.getItem('theme'))
+let toggleButtons = document.querySelectorAll('.tgl');
+toggleButtons.forEach(button => {
+    if (button.getAttribute('data-theme') == localStorage.getItem('theme')){
+        button.classList.add('selected')
+    }
+})
