@@ -10,7 +10,7 @@ function add_entry_on_click(entry) {
     if (operators.includes(btn) && (operators.includes(expression.value.charAt(expression.value.length - 1)))) {
         return
     }
-    if (operators.includes(btn)){
+    if (operators.includes(btn)) {
 
     }
     expression.value += btn;
@@ -21,12 +21,12 @@ let buttons = document.querySelectorAll('.btn')
 
 buttons.forEach(btn => {
     btn.addEventListener('click', add_entry_on_click);
-    btn.addEventListener('click', function(event) {
+    btn.addEventListener('click', function (event) {
         event.target.classList.add('scale-animation');
 
-        setTimeout(function() {
+        setTimeout(function () {
             event.target.classList.remove('scale-animation');
-        }, 100); 
+        }, 100);
     });
 
 })
@@ -64,7 +64,7 @@ function delete_last() {
 function calculate() {
     let expression = document.getElementById('expression');
     let lastChar = expression.value.slice(-1);
-    
+
     if (['+', '-', 'x', '/'].includes(lastChar)) {
         return;
     }
@@ -123,7 +123,7 @@ function change_theme(event) {
     });
 
     let theme = event.target.getAttribute('data-theme');
-    localStorage.setItem('theme',theme)
+    localStorage.setItem('theme', theme)
     document.querySelector('.main').setAttribute('data-theme', theme)
     event.target.classList.add('selected');
     console.log(localStorage.getItem('theme'))
@@ -133,13 +133,14 @@ function change_theme(event) {
 let toggles = document.querySelectorAll('.tgl')
 toggles.forEach(tgl => tgl.addEventListener('click', change_theme))
 
+if (localStorage.getItem('theme')) {
 
-document.querySelector('.main').setAttribute('data-theme',localStorage.getItem('theme'))
+    document.querySelector('.main').setAttribute('data-theme', localStorage.getItem('theme'))
+}
+
 let toggleButtons = document.querySelectorAll('.tgl');
 toggleButtons.forEach(button => {
-    if (localStorage.getItem('theme')){
-        if (button.getAttribute('data-theme') == localStorage.getItem('theme')){
-            button.classList.add('selected')
-        }
+    if (button.getAttribute('data-theme') == localStorage.getItem('theme')) {
+        button.classList.add('selected')
     }
 })
